@@ -11,7 +11,7 @@
 #include "DataLayer/FastaIndex.h"
 
 WindowedFileParser::WindowedFileParser(string const &fileName,
-		unsigned windowSize) :
+		unsigned windowSize):
 		m_windowSize(windowSize)
 {
 	m_fastaFileHandle.open(fileName.c_str(), ifstream::in);
@@ -29,7 +29,7 @@ const vector<string> WindowedFileParser::getHeaders() const
 }
 
 //sets the location in the file to the start of the sequence given a header
-string &WindowedFileParser::setLocationByHeader(string const &header)
+void WindowedFileParser::setLocationByHeader(string const &header)
 {
 	m_sequenceNotEnd = true;
 	m_currentHeader = header;
@@ -43,7 +43,10 @@ string &WindowedFileParser::setLocationByHeader(string const &header)
 	{
 		m_currentString += bufferString;
 	}
-	return m_currentString;
+	m_nextNonATCG = ReadsProcessor::prepSeq(m_currentString);
+	m_reset = true;
+	m_nextNonATCG = extendUntilNonATCG(m_nextNonATCG);
+	m_currentLinePos = 0;
 }
 
 size_t WindowedFileParser::getSequenceSize(string const &header) const
@@ -52,27 +55,92 @@ size_t WindowedFileParser::getSequenceSize(string const &header) const
 }
 
 /*
- * Return the next string in window
+ * Extends until a long enough stretch of Non ATCG is encountered
  */
-string &WindowedFileParser::getNextSeq()
-{
-	//removed parts of string already seen, except for m_windowSize -1 # of elements
-	m_currentString.erase(0, m_currentString.size() - (m_windowSize - 1));
-	//grow the sequence to match the correct window size
-	//stop if there are no more lines left in fasta file
-	while (m_fastaFileHandle.is_open()
-			&& (m_currentString.length() < m_windowSize)
+unsigned WindowedFileParser::extendUntilNonATCG(unsigned nextNonATCG){
+	//base case
+	if (nextNonATCG >= m_windowSize + m_currentLinePos) {
+		return nextNonATCG;
+	}
+
+	m_reset = true;
+	m_currentString.erase(0, nextNonATCG + 1);
+	m_currentLinePos = 0;
+	while ((m_currentString.length() < m_windowSize)
 			&& (m_currentCharNumber < m_fastaIndex[m_currentHeader].size)
 			&& getline(m_fastaFileHandle, m_bufferString)) {
 		m_currentString += m_bufferString;
 	}
+	nextNonATCG = ReadsProcessor::prepSeq(m_currentString);
 
-	//if there is not enough sequence for a full kmer
 	if (m_currentString.length() < m_windowSize) {
 		m_sequenceNotEnd = false;
-//		return NULL;
 	}
-	return m_currentString;
+	return(extendUntilNonATCG(nextNonATCG));
+}
+
+
+/*
+ * Return the next string in sliding window, also cleans and formats
+ * sequences using ReadProcessor
+ */
+char* WindowedFileParser::getNextSeq()
+{
+	char* outputStr = m_currentString.substr(m_currentLinePos++, m_windowSize).c_str();
+	m_nextNonATCG = extendUntilNonATCG(m_nextNonATCG);
+	if (m_currentString.length() < m_windowSize + m_currentLinePos) {
+		m_currentString.erase(0, m_currentLinePos);
+		m_currentLinePos = 0;
+		//grow the sequence to match the correct window size
+		//stop if there are no more lines left in fasta file
+		while (m_fastaFileHandle.is_open()
+				&& (m_currentString.length() < m_windowSize)
+				&& (m_currentCharNumber < m_fastaIndex[m_currentHeader].size)
+				&& getline(m_fastaFileHandle, m_bufferString)) {
+			m_currentString += m_bufferString;
+		}
+		m_nextNonATCG = ReadsProcessor::prepSeq(m_currentString);
+
+		//if there is not enough sequence for a full kmer
+		if (m_currentString.length() < m_windowSize) {
+			m_sequenceNotEnd = false;
+		}
+	}
+	return outputStr;
+}
+
+/*
+ * Obtains out and in char for rolling hash
+ * returns if a reset was performed.
+ */
+bool WindowedFileParser::getNextChar(char &out, char &in){
+	m_reset = false;
+	m_nextNonATCG = extendUntilNonATCG(m_nextNonATCG);
+	if(m_reset){
+		return m_reset;
+	}
+	out = m_currentString[m_currentLinePos];
+	in = m_currentString[m_currentLinePos++ + m_windowSize];
+	if (m_nextNonATCG < m_windowSize + m_currentLinePos) {
+		m_currentString.erase(0, m_currentLinePos);
+		m_currentLinePos = 0;
+		//grow the sequence to match the correct window size
+		//stop if there are no more lines left in fasta file
+		while (m_fastaFileHandle.is_open()
+				&& (m_currentString.length() < m_windowSize)
+				&& (m_currentCharNumber < m_fastaIndex[m_currentHeader].size)
+				&& getline(m_fastaFileHandle, m_bufferString))
+		{
+			m_currentString += m_bufferString;
+		}
+		m_nextNonATCG = ReadsProcessor::prepSeq(m_currentString);
+
+		//if there is not enough sequence for a full kmer
+		if (m_currentString.length() < m_windowSize) {
+			m_sequenceNotEnd = false;
+		}
+	}
+	return m_reset;
 }
 
 bool WindowedFileParser::notEndOfSeqeunce() const

@@ -23,9 +23,10 @@ public:
 	//constructor/destructor
 	explicit WindowedFileParser(const string &fileName, unsigned windowSize);
 	const vector<string> getHeaders() const;
-	string &setLocationByHeader( const string &header);
+	void setLocationByHeader( const string &header);
 	size_t getSequenceSize( const string &header) const;
-	string &getNextSeq();
+	char* getNextSeq();
+	bool getNextChar(char &out, char &in);
 
 	bool notEndOfSeqeunce() const;
 
@@ -45,16 +46,21 @@ private:
 	unsigned m_windowSize;
 	vector<string> m_headers;
 	string m_currentHeader;
-	size_t m_currentCharNumber;
+	unsigned m_currentCharNumber;
+	unsigned m_currentLinePos;
 	string m_window;
 	string m_currentString;
 	bool m_sequenceNotEnd;
+
+	unsigned m_nextNonATCG;
+	bool m_reset;
 
 	string m_bufferString; //so reallocation does not need to occur
 
 	//helper methods
 	void initializeIndex(string const &fileName);
 
+	unsigned extendUntilNonATCG(unsigned nextNonATCG);
 };
 
 #endif /* WINDOWEDFILEPARSER_H_ */
