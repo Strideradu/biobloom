@@ -13,7 +13,6 @@
 #include <iostream>
 #include <fstream>
 #include "DataLayer/FastaReader.h"
-#include "Common/ReadsProcessor.h"
 #include <deque>
 
 using namespace std;
@@ -26,7 +25,8 @@ public:
 	const vector<string> getHeaders() const;
 	void setLocationByHeader( const string &header);
 	size_t getSequenceSize( const string &header) const;
-	const char* getNextSeq();
+	string &getNextSeq();
+
 	bool notEndOfSeqeunce() const;
 
 	virtual ~WindowedFileParser();
@@ -49,7 +49,6 @@ private:
 	size_t m_currentLinePos;
 	string m_window;
 	string m_currentString;
-	ReadsProcessor m_proc;
 	bool m_sequenceNotEnd;
 
 	string m_bufferString; //so reallocation does not need to occur
