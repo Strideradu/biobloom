@@ -29,7 +29,7 @@ const vector<string> WindowedFileParser::getHeaders() const
 }
 
 //sets the location in the file to the start of the sequence given a header
-void WindowedFileParser::setLocationByHeader(string const &header)
+string &WindowedFileParser::setLocationByHeader(string const &header)
 {
 	m_sequenceNotEnd = true;
 	m_currentHeader = header;
@@ -43,7 +43,7 @@ void WindowedFileParser::setLocationByHeader(string const &header)
 	{
 		m_currentString += bufferString;
 	}
-	m_currentLinePos = 0;
+	return m_currentString;
 }
 
 size_t WindowedFileParser::getSequenceSize(string const &header) const
@@ -56,8 +56,8 @@ size_t WindowedFileParser::getSequenceSize(string const &header) const
  */
 string &WindowedFileParser::getNextSeq()
 {
-	m_currentString.erase(0, m_currentLinePos);
-	m_currentLinePos = 0;
+	//removed parts of string already seen, except for m_windowSize -1 # of elements
+	m_currentString.erase(0, m_currentString.size() - (m_windowSize - 1));
 	//grow the sequence to match the correct window size
 	//stop if there are no more lines left in fasta file
 	while (m_fastaFileHandle.is_open()

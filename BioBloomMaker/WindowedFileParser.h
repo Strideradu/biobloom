@@ -23,7 +23,7 @@ public:
 	//constructor/destructor
 	explicit WindowedFileParser(const string &fileName, unsigned windowSize);
 	const vector<string> getHeaders() const;
-	void setLocationByHeader( const string &header);
+	string &setLocationByHeader( const string &header);
 	size_t getSequenceSize( const string &header) const;
 	string &getNextSeq();
 
@@ -46,7 +46,6 @@ private:
 	vector<string> m_headers;
 	string m_currentHeader;
 	size_t m_currentCharNumber;
-	size_t m_currentLinePos;
 	string m_window;
 	string m_currentString;
 	bool m_sequenceNotEnd;
