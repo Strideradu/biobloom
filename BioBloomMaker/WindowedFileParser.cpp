@@ -44,7 +44,6 @@ void WindowedFileParser::setLocationByHeader(string const &header)
 		m_currentString += bufferString;
 	}
 	m_nextNonATCG = ReadsProcessor::prepSeq(m_currentString);
-	m_reset = true;
 	m_nextNonATCG = extendUntilNonATCG(m_nextNonATCG);
 	m_currentLinePos = 0;
 }
@@ -57,13 +56,13 @@ size_t WindowedFileParser::getSequenceSize(string const &header) const
 /*
  * Extends until a long enough stretch of Non ATCG is encountered
  */
-unsigned WindowedFileParser::extendUntilNonATCG(unsigned nextNonATCG){
+unsigned WindowedFileParser::extendUntilNonATCG(unsigned nextNonATCG, bool &reset){
 	//base case
 	if (nextNonATCG >= m_windowSize + m_currentLinePos) {
 		return nextNonATCG;
 	}
 
-	m_reset = true;
+	reset = true;
 	m_currentString.erase(0, nextNonATCG + 1);
 	m_currentLinePos = 0;
 	while ((m_currentString.length() < m_windowSize)
@@ -76,7 +75,7 @@ unsigned WindowedFileParser::extendUntilNonATCG(unsigned nextNonATCG){
 	if (m_currentString.length() < m_windowSize) {
 		m_sequenceNotEnd = false;
 	}
-	return(extendUntilNonATCG(nextNonATCG));
+	return(extendUntilNonATCG(nextNonATCG, reset));
 }
 
 
@@ -111,13 +110,13 @@ char* WindowedFileParser::getNextSeq()
 
 /*
  * Obtains out and in char for rolling hash
- * returns if a reset was performed.
+ * Returns if a reset was performed, without changing in and out.
  */
 bool WindowedFileParser::getNextChar(char &out, char &in){
-	m_reset = false;
-	m_nextNonATCG = extendUntilNonATCG(m_nextNonATCG);
-	if(m_reset){
-		return m_reset;
+	bool reset = false;
+	m_nextNonATCG = extendUntilNonATCG(m_nextNonATCG, reset);
+	if(reset){
+		return true;
 	}
 	out = m_currentString[m_currentLinePos];
 	in = m_currentString[m_currentLinePos++ + m_windowSize];
@@ -140,7 +139,7 @@ bool WindowedFileParser::getNextChar(char &out, char &in){
 			m_sequenceNotEnd = false;
 		}
 	}
-	return m_reset;
+	return false;
 }
 
 bool WindowedFileParser::notEndOfSeqeunce() const

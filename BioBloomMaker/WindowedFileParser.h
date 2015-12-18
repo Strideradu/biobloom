@@ -53,14 +53,13 @@ private:
 	bool m_sequenceNotEnd;
 
 	unsigned m_nextNonATCG;
-	bool m_reset;
 
 	string m_bufferString; //so reallocation does not need to occur
 
 	//helper methods
 	void initializeIndex(string const &fileName);
 
-	unsigned extendUntilNonATCG(unsigned nextNonATCG);
+	unsigned extendUntilNonATCG(unsigned nextNonATCG, bool &reset = true);
 };
 
 #endif /* WINDOWEDFILEPARSER_H_ */
