@@ -121,7 +121,7 @@ bool WindowedFileParser::getNextChar(char &out, char &in){
 	}
 	out = m_currentString[m_currentLinePos];
 	in = m_currentString[m_currentLinePos++ + m_windowSize];
-	if (m_nextNonATCG < m_windowSize + m_currentLinePos) {
+	if (m_currentString.length() < m_windowSize + m_currentLinePos) {
 		m_currentString.erase(0, m_currentLinePos);
 		m_currentLinePos = 0;
 		//grow the sequence to match the correct window size
