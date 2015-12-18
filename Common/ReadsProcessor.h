@@ -9,6 +9,7 @@
 #define READSPROCESSOR_H_
 #include <string>
 #include <stdint.h>
+#include <limits>
 
 using namespace std;
 
@@ -48,12 +49,15 @@ static const char fwTable[256] = {
 };
 
 namespace ReadsProcessor {
+
+static const unsigned ATCG = numeric_limits<unsigned>::max();
+
 /*
  * In place string cleanup and preparation, cleans sequence until it find
  * non-atcg character
- * Returns string position of nonATGC character, sequence size otherwise
+ * Returns string position of nonATGC character, max unsigned otherwise
  */
-unsigned ReadsProcessor::prepSeq(string &sequence) const {
+unsigned prepSeq(string &sequence) {
 	for (unsigned outputIndex = 0; outputIndex < sequence.length();
 			++outputIndex) {
 		sequence[outputIndex] = fwTable[(uint8_t) sequence[outputIndex]];
@@ -62,7 +66,7 @@ unsigned ReadsProcessor::prepSeq(string &sequence) const {
 		}
 		++outputIndex;
 	}
-	return sequence.size();
+	return ATCG;
 }
 }
 ;

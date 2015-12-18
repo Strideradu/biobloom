@@ -75,7 +75,7 @@ unsigned WindowedFileParser::extendUntilNonATCG(unsigned nextNonATCG, bool &rese
 	if (m_currentString.length() < m_windowSize) {
 		m_sequenceNotEnd = false;
 	}
-	return(extendUntilNonATCG(nextNonATCG, reset));
+	return(extendUntilNonATCG(nextNonATCG));
 }
 
 

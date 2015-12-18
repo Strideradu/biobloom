@@ -94,12 +94,25 @@ size_t BloomFilterGenerator::generate(const string &filename) {
 		for (vector<string>::iterator j = i->second.begin();
 				j != i->second.end(); ++j) {
 			parser.setLocationByHeader(*j);
-			//object to process reads
+
+			bool reset = true;
+			uint64_t fwHashVal = 0;
+			uint64_t rvHashVal = 0;
+
+			char* currentSeq = parser.getNextSeq();
+			insertKmer(filter.multiHash(currentSeq, fwHashVal, rvHashVal), filter);
+
 			//insert elements into filter
-			//read fasta file line by line and split using sliding window
 			while (parser.notEndOfSeqeunce()) {
-				const char* currentSeq = parser.getNextSeq();
-				checkAndInsertKmer(currentSeq, filter);
+				char in;
+				char out;
+				if(parser.getNextChar(out, in)){
+					currentSeq = parser.getNextSeq();
+					insertKmer(filter.multiHash(currentSeq, fwHashVal, rvHashVal), filter);
+				}
+				else{
+					insertKmer(filter.multiHash(fwHashVal, rvHashVal, out, in), filter);
+				}
 			}
 		}
 	}
@@ -166,12 +179,25 @@ size_t BloomFilterGenerator::generateProgressive(const string &filename,
 		for (vector<string>::iterator j = i->second.begin();
 				j != i->second.end(); ++j) {
 			parser.setLocationByHeader(*j);
-			//object to process reads
+
+			bool reset = true;
+			uint64_t fwHashVal = 0;
+			uint64_t rvHashVal = 0;
+
+			char* currentSeq = parser.getNextSeq();
+			insertKmer(filter.multiHash(currentSeq, fwHashVal, rvHashVal), filter);
+
 			//insert elements into filter
-			//read fasta file line by line and split using sliding window
 			while (parser.notEndOfSeqeunce()) {
-				const char* currentSeq = parser.getNextSeq();
-				checkAndInsertKmer(currentSeq, filter);
+				char in;
+				char out;
+				if(parser.getNextChar(out, in)){
+					currentSeq = parser.getNextSeq();
+					insertKmer(filter.multiHash(currentSeq, fwHashVal, rvHashVal), filter);
+				}
+				else{
+					insertKmer(filter.multiHash(fwHashVal, rvHashVal, out, in), filter);
+				}
 			}
 		}
 	}
@@ -560,47 +586,41 @@ size_t BloomFilterGenerator::generate(const string &filename,
 		//let user know that files are being read
 		cerr << "Processing File: " << i->first << endl;
 		WindowedFileParser parser(i->first, m_kmerSize);
+
+		//Check if kmer or subkmers are located in filter
+		if (subInfo.getKmerSize() != m_kmerSize) {
+			cerr << "ERROR: Must use identical size k-mers in subtractive filter"
+					<< endl;
+		}
+
 		for (vector<string>::iterator j = i->second.begin();
 				j != i->second.end(); ++j) {
-			parser.setLocationByHeader(*j);
-			//object to process reads
+			bool reset = true;
+			uint64_t fwHashVal = 0;
+			uint64_t rvHashVal = 0;
+
+			char* currentSeq = parser.getNextSeq();
+			insertKmer(filter.multiHash(currentSeq, fwHashVal, rvHashVal), filter);
+
 			//insert elements into filter
-			//read fasta file line by line and split using sliding window
 			while (parser.notEndOfSeqeunce()) {
-				const char* currentSeq = parser.getNextSeq();
-				if (currentSeq != NULL) {
-					//allow kmer into filter?
-					bool allowKmer = false;
-
-					//Check if kmer or subkmers are located in filter
-					if (subInfo.getKmerSize() == m_kmerSize) {
-						//if kmer does not exist set allowance to true
-						allowKmer = !filterSub.contains(currentSeq);
+				char in;
+				char out;
+				//determine if rolling or not
+				if (parser.getNextChar(out, in)) {
+					currentSeq = parser.getNextSeq();
+					const vector<size_t> &tempHash = filter.multiHash(
+							currentSeq, fwHashVal, rvHashVal);
+					if (!filterSub.contains(currentSeq, fwHashVal, rvHashVal)) {
+						insertKmer(tempHash, filter);
 					} else {
-						//TODO make compatable with smaller kmer sizes
-						cerr
-								<< "ERROR: Must use identical size k-mers in subtractive filter"
-								<< endl;
-//						uint16_t subSections = kmerSize - kmerSize;
-//						for (uint16_t i = 0; i <= subSections; ++i) {
-//							if (!filterSub.contains(subProc.prepSeq(currentSeq, i)))
-//							{
-//								//if any sub kmer does not exists set allowance to true
-//								allowKmer = true;
-//								break;
-//							}
-//						}
+						++kmerRemoved;
 					}
-
-					if (allowKmer) {
-						const vector<size_t> &tempHash = filter.multiHash(
-								currentSeq);
-						if (filter.contains(tempHash)) {
-							m_redundancy++;
-						} else {
-							filter.insert(tempHash);
-							m_totalEntries++;
-						}
+				} else {
+					const vector<size_t> &tempHash = filter.multiHash(fwHashVal,
+							rvHashVal, out, in);
+					if (!filterSub.contains(currentSeq, fwHashVal, rvHashVal)) {
+						insertKmer(tempHash, filter);
 					} else {
 						++kmerRemoved;
 					}

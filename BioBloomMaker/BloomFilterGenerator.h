@@ -11,10 +11,13 @@
 #include <vector>
 #include "bloomfilter/BloomFilter.hpp"
 #include "Common/SeqEval.h"
+#include "bloomfilter/RollingHash.h"
 
 using namespace std;
 
-enum createMode{PROG_STD, PROG_INC};
+enum createMode {
+	PROG_STD, PROG_INC
+};
 
 class BloomFilterGenerator {
 public:
@@ -23,7 +26,6 @@ public:
 
 	explicit BloomFilterGenerator(vector<string> const &filenames,
 			unsigned kmerSize, unsigned hashNum);
-
 
 	//TODO: THREAD ME!
 	size_t generate(const string &filename);
@@ -54,8 +56,7 @@ private:
 	boost::unordered_map<string, vector<string> > m_fileNamesAndHeaders;
 
 	inline void checkAndInsertKmer(const char* currentSeq,
-			BloomFilter &filter)
-	{
+			BloomFilter &filter) {
 		if (currentSeq != NULL) {
 			const vector<size_t> &tempHash = filter.multiHash(currentSeq);
 			insertKmer(tempHash, filter);
@@ -63,8 +64,7 @@ private:
 	}
 
 	inline void insertKmer(const vector<size_t> &hashVals,
-			BloomFilter &filter)
-	{
+			BloomFilter &filter) {
 		if (filter.contains(hashVals)) {
 #pragma omp atomic
 			m_redundancy++;

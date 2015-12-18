@@ -18,8 +18,8 @@
 #include "boost/unordered/unordered_map.hpp"
 #include "DataLayer/FastaReader.h"
 #include "Common/Options.h"
-#include "Common/ReadsProcessor.h"
 #include "bloomfilter/BloomFilter.hpp"
+#include "bloomfilter/RollingHashIterator.h"
 
 using namespace std;
 using namespace boost;
@@ -44,8 +44,6 @@ inline bool evalSingle(const FastqRecord &rec, unsigned kmerSize,
 	threshold = denormalizeScore(threshold, kmerSize, rec.seq.length());
 	antiThreshold = floor(
 			denormalizeScore(antiThreshold, kmerSize, rec.seq.length()));
-
-	ReadsProcessor proc(kmerSize);
 
 	size_t currentLoc = 0;
 	double score = 0;
