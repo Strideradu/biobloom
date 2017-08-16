@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="biobloom"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="biobloom">
+				<Option output="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/biobloom.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/x86_64-pc-cygwin"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 biobloom"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="biobloom/fast">
+				<Option output="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/biobloom.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/x86_64-pc-cygwin"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/5.4.0/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 biobloom/fast"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/BioBloomCategorizer.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/BioBloomClassifier.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/BioBloomClassifier.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/MultiFilter.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/MultiFilter.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/ResultsManager.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomCategorizer/ResultsManager.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomMaker/BioBloomMaker.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomMaker/BloomFilterGenerator.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomMaker/BloomFilterGenerator.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomMaker/WindowedFileParser.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/BioBloomMaker/WindowedFileParser.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/BloomFilter.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/BloomFilter.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/BloomFilterInfo.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/BloomFilterInfo.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Dynamicofstream.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Dynamicofstream.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Fcontrol.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Fcontrol.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/IOUtil.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Options.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Options.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/ReadsProcessor.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/ReadsProcessor.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/SeqEval.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Sequence.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Sequence.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/SignalHandler.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/SignalHandler.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/StringUtil.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Uncompress.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/Uncompress.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/city.cc">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/city.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/citycrc.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/gzstream.C">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Common/gzstream.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/FastaIndex.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/FastaInterleave.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/FastaReader.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/FastaReader.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/FastaWriter.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/FastaWriter.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/Options.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/DataLayer/kseq.h">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/BloomFilterCategorizerTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/BloomFilterInfoTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/BloomFilterMakerTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/BloomFilterTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/ReadProcessorTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/SeqEvalTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/Tests/WindowedParserTests.cpp">
+			<Option target="biobloom"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

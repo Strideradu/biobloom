@@ -1,0 +1,3 @@
+/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/CMakeFiles/edit_cache.dir
+/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/c/Users/Nan/Documents/GitHub/biobloom/cmake-build-debug/CMakeFiles/biobloom.dir
