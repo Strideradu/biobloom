@@ -26,14 +26,12 @@ using namespace boost;
 
 namespace SeqEval {
 
-    inline double denormalizeScore(double score, unsigned kmerSize, size_t seqLen)
-    {
+    inline double denormalizeScore(double score, unsigned kmerSize, size_t seqLen) {
         assert(score >= 0 && score <= 1);
         return score * (seqLen - kmerSize + 1);
     }
 
-    inline double normalizeScore(double score, unsigned kmerSize, size_t seqLen)
-    {
+    inline double normalizeScore(double score, unsigned kmerSize, size_t seqLen) {
         return score / (seqLen - kmerSize + 1);
     }
 
@@ -42,8 +40,7 @@ namespace SeqEval {
  */
     inline bool evalSingle(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                            double threshold, double antiThreshold, unsigned hashNum,
-                           vector<vector<size_t> > *hashValues, const BloomFilter *subtract)
-    {
+                           vector<vector<size_t> > *hashValues, const BloomFilter *subtract) {
         threshold = denormalizeScore(threshold, kmerSize, rec.length());
         antiThreshold = floor(denormalizeScore(antiThreshold, kmerSize, rec.length()));
 
@@ -54,7 +51,7 @@ namespace SeqEval {
         unsigned antiScore = 0;
         unsigned streak = 0;
         while (rec.length() >= currentLoc + kmerSize) {
-            const unsigned char* currentSeq = proc.prepSeq(rec, currentLoc);
+            const unsigned char *currentSeq = proc.prepSeq(rec, currentLoc);
             if (streak == 0) {
                 if (currentSeq != NULL) {
                     vector<size_t> hash = multiHash(currentSeq, hashNum, kmerSize);
@@ -67,8 +64,7 @@ namespace SeqEval {
                         if (threshold <= score) {
                             return true;
                         }
-                    }
-                    else if (antiThreshold <= ++antiScore) {
+                    } else if (antiThreshold <= ++antiScore) {
                         return false;
                     }
                     ++currentLoc;
@@ -99,8 +95,7 @@ namespace SeqEval {
                             return true;
                         }
                         continue;
-                    }
-                    else if (antiThreshold <= ++antiScore) {
+                    } else if (antiThreshold <= ++antiScore) {
                         return false;
                     }
                 } else {
@@ -127,8 +122,7 @@ namespace SeqEval {
  */
     inline bool evalSingle(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                            double threshold, double antiThreshold, unsigned hashNum,
-                           vector<vector<size_t> > &hashValues)
-    {
+                           vector<vector<size_t> > &hashValues) {
         return evalSingle(rec, kmerSize, filter, threshold, antiThreshold, hashNum,
                           &hashValues, NULL);
     }
@@ -137,8 +131,7 @@ namespace SeqEval {
  * Evaluation algorithm with no hashValue storage (optimize speed for single queries)
  */
     inline bool evalSingle(const string &rec, unsigned kmerSize, const BloomFilter &filter,
-                           double threshold, size_t antiThreshold)
-    {
+                           double threshold, size_t antiThreshold) {
         return evalSingle(rec, kmerSize, filter, threshold, antiThreshold, filter.getHashNum(),
                           NULL, NULL);
     }
@@ -148,8 +141,7 @@ namespace SeqEval {
  */
     inline bool evalSingle(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                            double threshold, double antiThreshold, unsigned hashNum,
-                           vector<vector<size_t> > &hashValues, const BloomFilter &subtract)
-    {
+                           vector<vector<size_t> > &hashValues, const BloomFilter &subtract) {
         return evalSingle(rec, kmerSize, filter, threshold, antiThreshold, hashNum,
                           &hashValues, &subtract);
     }
@@ -159,8 +151,7 @@ namespace SeqEval {
  */
     inline bool evalMinMatchLen(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                                 unsigned minMatchLen, unsigned hashNum, vector<vector<size_t> > *hashValues,
-                                const BloomFilter *subtract)
-    {
+                                const BloomFilter *subtract) {
         ReadsProcessor proc(kmerSize);
         // number of contiguous k-mers matched
         unsigned matchLen = 0;
@@ -171,7 +162,7 @@ namespace SeqEval {
             if (l - i + matchLen < minMatchLen)
                 return false;
             // get 2-bit encoding of k-mer at index i
-            const unsigned char* kmer = proc.prepSeq(rec, i);
+            const unsigned char *kmer = proc.prepSeq(rec, i);
             if (kmer == NULL) {
                 matchLen = 0;
                 continue;
@@ -191,8 +182,7 @@ namespace SeqEval {
                     matchLen = kmerSize;
                 else
                     ++matchLen;
-            }
-            else {
+            } else {
                 matchLen = 0;
             }
             // if min match length reached
@@ -202,12 +192,13 @@ namespace SeqEval {
         return false;
     }
 
-    enum EvalMode { EVAL_STANDARD, EVAL_MIN_MATCH_LEN };
+    enum EvalMode {
+        EVAL_STANDARD, EVAL_MIN_MATCH_LEN
+    };
 
     inline bool evalRead(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                          double threshold, double antiThreshold, unsigned hashNum,
-                         vector<vector<size_t> > *hashValues, const BloomFilter *subtract, EvalMode mode)
-    {
+                         vector<vector<size_t> > *hashValues, const BloomFilter *subtract, EvalMode mode) {
         // compute enough hash values to check both the main Bloom filter
         // and the subtractive Bloom filter
         if (subtract != NULL) {
@@ -216,9 +207,9 @@ namespace SeqEval {
             }
         }
 
-        switch(mode) {
+        switch (mode) {
             case EVAL_MIN_MATCH_LEN:
-                return evalMinMatchLen(rec, kmerSize, filter, (unsigned)round(threshold),
+                return evalMinMatchLen(rec, kmerSize, filter, (unsigned) round(threshold),
                                        hashNum, hashValues, subtract);
             case EVAL_STANDARD:
             default:
@@ -230,23 +221,20 @@ namespace SeqEval {
 
     inline bool evalRead(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                          double threshold, double antiThreshold, unsigned hashNum,
-                         vector<vector<size_t> > &hashValues, const BloomFilter &subtract, EvalMode mode)
-    {
+                         vector<vector<size_t> > &hashValues, const BloomFilter &subtract, EvalMode mode) {
         return evalRead(rec, kmerSize, filter, threshold, antiThreshold, hashNum,
                         &hashValues, &subtract, mode);
     }
 
     inline bool evalRead(const string &rec, unsigned kmerSize, const BloomFilter &filter,
                          double threshold, double antiThreshold, unsigned hashNum,
-                         vector<vector<size_t> > &hashValues, EvalMode mode)
-    {
+                         vector<vector<size_t> > &hashValues, EvalMode mode) {
         return evalRead(rec, kmerSize, filter, threshold, antiThreshold, hashNum,
                         &hashValues, NULL, mode);
     }
 
     inline bool evalRead(const string &rec, unsigned kmerSize, const BloomFilter &filter,
-                         double threshold, double antiThreshold, EvalMode mode)
-    {
+                         double threshold, double antiThreshold, EvalMode mode) {
         return evalRead(rec, kmerSize, filter, threshold, antiThreshold,
                         filter.getHashNum(), NULL, NULL, mode);
     }
@@ -256,14 +244,13 @@ namespace SeqEval {
  * Returns score and does not have a stopping threshold
  */
     inline double evalSingleExhaust(const string &rec, unsigned kmerSize,
-                                    const BloomFilter &filter)
-    {
+                                    const BloomFilter &filter) {
         ReadsProcessor proc(kmerSize);
         size_t currentLoc = 0;
         double score = 0;
         unsigned streak = 0;
         while (rec.length() >= currentLoc + kmerSize) {
-            const unsigned char* currentKmer = proc.prepSeq(rec, currentLoc);
+            const unsigned char *currentKmer = proc.prepSeq(rec, currentLoc);
             if (streak == 0) {
                 if (currentKmer != NULL) {
                     if (filter.contains(currentKmer)) {
@@ -377,8 +364,7 @@ namespace SeqEval {
     inline bool eval(const string &rec, unsigned kmerSize,
                      const BloomFilter &filter, double threshold, double antiThreshold,
                      vector<bool> &visited, vector<vector<size_t> > &hashValues,
-                     unsigned &currentLoc, double &score, ReadsProcessor &proc)
-    {
+                     unsigned &currentLoc, double &score, ReadsProcessor &proc) {
         threshold = denormalizeScore(threshold, kmerSize, rec.length());
         antiThreshold = denormalizeScore(antiThreshold, kmerSize, rec.length());
         score = denormalizeScore(score, kmerSize, rec.length());
@@ -394,7 +380,7 @@ namespace SeqEval {
             //check if hash value is already generated
             if (hashValues[currentLoc].size() == 0) {
                 if (!visited[currentLoc]) {
-                    const unsigned char* currentSeq = proc.prepSeq(rec,
+                    const unsigned char *currentSeq = proc.prepSeq(rec,
                                                                    currentLoc);
                     if (currentSeq != NULL) {
                         hashValues[currentLoc] = multiHash(currentSeq, filter.getHashNum(),
@@ -414,8 +400,7 @@ namespace SeqEval {
                             hit = true;
                             break;
                         }
-                    }
-                    else if (antiThreshold <= ++antiScore) {
+                    } else if (antiThreshold <= ++antiScore) {
                         ++currentLoc;
                         hit = false;
                         break;
@@ -446,8 +431,7 @@ namespace SeqEval {
                             break;
                         }
                         continue;
-                    }
-                    else if (antiThreshold <= ++antiScore) {
+                    } else if (antiThreshold <= ++antiScore) {
                         ++currentLoc;
                         hit = false;
                         break;
@@ -474,7 +458,6 @@ namespace SeqEval {
         return hit;
     }
 
-}
-;
+};
 
 #endif /* SEQEVAL_H_ */
