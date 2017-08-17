@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6eb4b91-af97-4ce8-97a8-f2ce853c9b04" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/SeqEval.h" afterPath="$PROJECT_DIR$/Common/SeqEval.h" />
-    </list>
+    <list default="true" id="d6eb4b91-af97-4ce8-97a8-f2ce853c9b04" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -216,12 +214,12 @@
       <updated>1502390665169</updated>
       <workItem from="1502390670403" duration="1793000" />
       <workItem from="1502894799287" duration="4566000" />
-      <workItem from="1502917799188" duration="2910000" />
+      <workItem from="1502917799188" duration="3478000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9269000" />
+    <option name="totallyTimeSpent" value="9837000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2182" height="1402" extended-state="6" />
