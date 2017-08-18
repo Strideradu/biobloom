@@ -367,7 +367,7 @@ namespace SeqEval {
                      unsigned &currentLoc, double &score, ReadsProcessor &proc) {
         threshold = denormalizeScore(threshold, kmerSize, rec.length());
         antiThreshold = denormalizeScore(antiThreshold, kmerSize, rec.length());
-        score = denormalizeScore(score, kmerSize, rec.length());
+        //score = denormalizeScore(score, kmerSize, rec.length());
 
         unsigned antiScore = 0;
         unsigned streak = 0;
@@ -454,7 +454,7 @@ namespace SeqEval {
                 streak = 0;
             }
         }
-        score = normalizeScore(score, kmerSize, rec.length());
+        //score = normalizeScore(score, kmerSize, rec.length());
         return hit;
     }
 
