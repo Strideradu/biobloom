@@ -398,7 +398,7 @@ namespace SeqEval {
                         if (threshold <= score) {
                             ++currentLoc;
                             hit = true;
-                            break;
+                            //break;
                         }
                     } else if (antiThreshold <= ++antiScore) {
                         ++currentLoc;

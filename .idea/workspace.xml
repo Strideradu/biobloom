@@ -67,8 +67,8 @@
       <file leaf-file-name="SeqEval.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Common/SeqEval.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="905">
-              <caret line="387" column="21" lean-forward="true" selection-start-line="387" selection-start-column="21" selection-end-line="387" selection-end-column="21" />
+            <state relative-caret-position="608">
+              <caret line="391" column="0" lean-forward="true" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
               <folding>
                 <element signature="e#250#267#0" expanded="true" />
               </folding>
@@ -217,12 +217,12 @@
       <workItem from="1502390670403" duration="1793000" />
       <workItem from="1502894799287" duration="4566000" />
       <workItem from="1502917799188" duration="3478000" />
-      <workItem from="1503061994160" duration="33000" />
+      <workItem from="1503061994160" duration="1311000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9870000" />
+    <option name="totallyTimeSpent" value="11148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2182" height="1402" extended-state="6" />
@@ -411,8 +411,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Common/SeqEval.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="905">
-          <caret line="387" column="21" lean-forward="true" selection-start-line="387" selection-start-column="21" selection-end-line="387" selection-end-column="21" />
+        <state relative-caret-position="608">
+          <caret line="391" column="0" lean-forward="true" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
           <folding>
             <element signature="e#250#267#0" expanded="true" />
           </folding>
