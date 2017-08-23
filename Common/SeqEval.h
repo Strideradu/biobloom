@@ -400,13 +400,15 @@ namespace SeqEval {
                             hit = true;
                             //break;
                         }
-                    } else if (antiThreshold <= ++antiScore) {
+                    } 
+                    else if (antiThreshold <= ++antiScore) {
                         ++currentLoc;
                         hit = false;
                         break;
                     }
                     ++currentLoc;
-                } else {
+                } 
+                else {
                     if (currentLoc > kmerSize) {
                         currentLoc += kmerSize + 1;
                         antiScore += kmerSize + 1;
@@ -419,7 +421,8 @@ namespace SeqEval {
                         break;
                     }
                 }
-            } else {
+            } 
+            else {
                 if (hashValues[currentLoc].size() > 0) {
                     if (filter.contains(hashValues[currentLoc])) {
                         ++streak;
@@ -431,12 +434,14 @@ namespace SeqEval {
                             break;
                         }
                         continue;
-                    } else if (antiThreshold <= ++antiScore) {
+                    } 
+                    else if (antiThreshold <= ++antiScore) {
                         ++currentLoc;
                         hit = false;
                         break;
                     }
-                } else {
+                } 
+                else {
                     //if has non atcg character
                     currentLoc += kmerSize + 1;
                     antiScore += kmerSize + 1;
